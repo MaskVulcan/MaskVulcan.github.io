@@ -9,7 +9,10 @@ module.exports = function(grunt) {
     uglify: {
         options: {
           banner: '/*! This is uglify test - ' +
-            '<%= grunt.template.today("yyyy-mm-dd") %> */'
+            '<%= grunt.template.today("yyyy-mm-dd") %> */',
+          beautify:true,
+          mangle:false,
+          compress:true,
         },
         app_task: {
           files: {
