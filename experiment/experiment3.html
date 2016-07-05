@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>李俊杰的个人主页</title>
+    <meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../style.css" />
+    <script>
+        var root_path = '';
+    </script>
+    <link href="http://github.com/ktmud/kwiki/commits/master.atom" rel="alternate" title="Kdmud Wiki 的最新更改" type="application/atom+xml" />
+</head>
+
+<body>
+    <div id="all">
+        <div id="header">
+            <ul id="top-nav">
+                <li>
+                    <a href="../index.html">首页</a>
+                </li>
+                <li>
+                    <a href="../Web.html">Web</a>
+                </li>
+                <li>
+                    <a href="../blogs.html">博客</a>
+                </li>
+            </ul>
+        </div>
+        <div id="ElasticDiv" style="display:none; position:absolute; z-index:1000; background:#67a3d9;">
+    		<div id="ElasticContent" style="width="100px; height=10px;z-index:1001; position:absolute;></div>
+    		<input type="button" value="关闭" onclick="closeElasticDiv();" />
+		</div>
+        <div id="showBackTop">
+            <h2>BackToTop 组件控制</h2>
+            <p>Shift+Up  快捷键返回顶部</p>
+            <ul>
+                <li><input type="button" value="LeftUp" onclick="Back({LeftUp:true});" /></li>
+                <li><input type="button" value="LeftDown" onclick="Back({LeftDown:true});" /></li>
+                <li><input type="button" value="RightUp" onclick="Back({RightUp:true});" /></li>
+                <li><input type="button" value="RightDown" onclick="Back({RightDown:true});" /></li>
+            </ul>
+        </div>
+        <div>
+           <hr />
+            <h2>弹层控制</h2>
+            <p>Up快捷键关闭弹窗</p>
+            <ul>
+                <li><input type="button" value="Draggable" onclick="Show({Content: 'Test',draggable:true,closeKey:38});" /></li>
+                <li><input type="button" value="UnDraggable" onclick="Show({Content: 'Test',draggable:false,closeKey:38});" /></li>
+                <li><input type="text" name="test" id="text"><input type="button" value="Entry" onclick="textShow();" /></li>
+            </ul>
+        </div>
+        <p>
+                <h3 id="#toc_1.2.1">前端资料</h3>
+                <ol>
+                    <li>
+                        <a href="http://echarts.baidu.com/index.html">Echarts,大量的前端特效供你学习参考</a>
+                    </li>
+                    <li>
+                        <a href="https://www.codecademy.com">Codecademy，很好的一个从零开始学习前端后台的网站。</a>
+                    </li>
+
+                    <li>
+                        <a href="http://bennettfeely.com/">很好的一个节省你前端工作的网站。</a>
+                    </li>
+                    <li>
+                        <a href="http://www.romancortes.com/blog/">一个前端大神博客</a>
+                    </li>
+                    <li><a href="http://codepen.io/hakimel/full/aIhkf">炫酷CSS动画</a></li>
+                </ol>
+            </p>
+            <p>
+                <hr />
+                <h3 id="#toc_1.2.2">其他推荐</h3>
+                <ol>
+                    <li>
+                        <a href="http://matplotlib.org/">python可视化的一个库，matplotlib，巨强大。</a>
+                    </li>
+                    <li><a href="http://blog.codinglabs.org/articles/how-web-analytics-data-collection-system-work.html">网站统计中的数据收集原理及实现</a></li>
+                    <li>
+                        <a href="http://wiki.henryhu.net/wiki/%E5%88%B7%E8%AF%BE%E6%9C%BA">一个大神写过的的刷课机。。。。。。</a>
+                    </li>
+                    <li><a href="http://train.usaco.org/usacogate">USACO刷题网站</a></li>
+                    <li>
+                        <a href="https://www.coursera.org/learn/machine-learning">机器学习入门课</a>
+                    </li>
+                </ol>
+            </p>
+    </div>
+    <div id="footer">
+        <p>&copy; 2016 李俊杰 &nbsp;&nbsp; <a href="mailto:thssljj@gmail.com">联系作者</a></p>
+    </div>
+    </div>
+    <script type="text/javascript" src="../buttun.js"></script>
+    <script type="text/javascript">
+    	function textShow() {
+    		var t=document.getElementById("text").value;	
+    		Show({Content: t,closeKey:38});
+	}
+    </script>
+</body>
+
+</html>
