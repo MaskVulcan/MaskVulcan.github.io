@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>微信墙</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+</head>
+
+<body >
+	<div ng-app="myApp" ng-controller="myCtrl" ng-init="nickname0=' ';nickname1=' ' ;nickname2=' ' " style="width:100%,height:100%">	
+	<p></p>
+	<div class = "admin"><div  class="test1"><div class="nickname">admin</div><img src="./1.jpg"/> </div><div class="test2"><div class = "content" id="admincontent"></div></div></div>
+	<p></p>
+	<div class = "user" id="user0"><div class="test1" ><div class="nickname">{{nickname0}}</div><img /> </div><div class="test2" id="show"><div class = "content" id="content0">{{content0}}</div></div></div>
+	<p></p>
+	<div class = "user" id="user1"><div class="test1" ><div class="nickname">{{nickname1}}</div><img /> </div><div  class="test2" ><div class = "content" id="content1">{{content1}}</div></div></div>
+	<p></p>
+	<div class = "user" id="user2"><div  class="test1"><div class="nickname">{{nickname2}}</div><img /> </div><div class="test2" ><div class = "content" id="content2">{{content2}}</div></div></div>
+	</div>
+</body>
+<script type="text/javascript">
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+});
+	var i = 0;
+	var socket = io.connect("https://wall.cgcgbcbc.com");
+	socket.on("new message",function (data) {
+		var p2=Promise.resolve(new Promise(function(resolve,reject){
+		$('#user'+i).fadeOut("slow",function () {
+			$('.user .nickname')[i].innerText = data.nickname;
+			$('.user .content')[i].innerText = data.content;
+			$('.user img')[i].src = data.headimgurl;
+			resolve(1);
+		});
+		}));
+		p2.then(function(v) {
+		$('#content'+i).each(function () {
+			if (this.offsetWidth-this.scrollWidth<0) {
+				var a = this;
+				var x = this.scrollWidth - this.offsetWidth;
+				var style = document.documentElement.appendChild(document.createElement("style")),
+				rule = " run {\
+    					0%   {\
+      					-webkit-transform:translateX(100%);\
+    				}\
+    				100% {\
+       				 -webkit-transform:translateX("+ "-"+x/(this.offsetWidth)*100+ "%);\
+    				}\
+				}";
+				if (CSSRule.KEYFRAMES_RULE) { // W3C
+    				style.sheet.insertRule("@keyframes" + rule, 0);
+				} else if (CSSRule.WEBKIT_KEYFRAMES_RULE) { // WebKit
+    				style.sheet.insertRule("@-webkit-keyframes" + rule, 0);
+				}
+				$('#content'+i).css({
+    				"animation": "run 5s ease 1 forwards",
+					"-moz-animation": "run 5s ease 1 forwards",
+					"-webkit-animation": "run 5s ease 1 forwards",
+				});
+				// var id = setInterval(function () {
+    //     	  		if (a.offsetWidth-a.scrollWidth>=0) { console.log('a');clearInterval(id);}
+    //     	  		else { a.left = a.left-x/10; console.log(a.offsetWidth);};
+    //     	  		}, 10
+    //     	  	);
+				}
+			else {
+				$('#content'+i).css({
+    				"animation": "left-one 5s ease 1 forwards",
+					"-moz-animation": "left-one 5s ease 1 forwards",
+					"-webkit-animation": "left-one 5s ease 1 forwards",
+				});
+			}
+		});
+});
+		$('#user'+i).fadeIn('slow',function  () {
+				i++;
+				i = i%3;
+		});
+		
+	});
+	socket.on("admin",function (data){
+		var p2=Promise.resolve(new Promise(function(resolve,reject){
+		$('.admin').fadeOut("slow",function () {
+			$('.admin .nickname')[0].innerText = data.nickname;
+			$('.admin .content')[0].innerText = data.content;
+			resolve(1);
+		});
+
+		}));
+		p2.then(function(v) {
+		$('.admin .content').each(function () {
+			if (this.offsetWidth-this.scrollWidth<0) {
+				var a = this;
+				var x = this.scrollWidth - this.offsetWidth;
+				var style = document.documentElement.appendChild(document.createElement("style")),
+				rule = " run {\
+    					0%   {\
+      					-webkit-transform:translateX(100%);\
+    				}\
+    				100% {\
+       				 -webkit-transform:translateX("+ "-"+x/(this.offsetWidth)*100+ "%);\
+    				}\
+				}";
+				if (CSSRule.KEYFRAMES_RULE) { // W3C
+    				style.sheet.insertRule("@keyframes" + rule, 0);
+				} else if (CSSRule.WEBKIT_KEYFRAMES_RULE) { // WebKit
+    				style.sheet.insertRule("@-webkit-keyframes" + rule, 0);
+				}
+				$('#content'+i).css({
+    				"animation": "run 5s ease 1 forwards",
+					"-moz-animation": "run 5s ease 1 forwards",
+					"-webkit-animation": "run 5s ease 1 forwards",
+				});
+			}
+			else {
+				$('.admin .content').css({
+    				"animation": "left-one 5s ease 1 forwards",
+					"-moz-animation": "left-one 5s ease 1 forwards",
+					"-webkit-animation": "left-one 5s ease 1 forwards",
+				});
+			}
+		});
+		});
+		$('.admin').fadeIn('slow',function  () {
+		});
+		});
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function  () {
+		if (xmlhttp.readyState==4 && xmlhttp.status >= 200 && xmlhttp.status < 300 || xmlhttp.status == 304) {
+			var json = JSON.parse(xmlhttp.responseText);
+			$('.user .nickname')[0].innerText = json[0].nickname;
+			$('.user .content')[0].innerText = json[0].content;
+			$('.user img')[0].src = json[0].headimgurl;
+			$('.user .nickname')[1].innerText = json[1].nickname;
+			$('.user .content')[1].innerText = json[1].content;
+			$('.user img')[1].src = json[1].headimgurl;
+			$('.user .nickname')[2].innerText = json[2].nickname;
+			$('.user .content')[2].innerText = json[2].content;
+			$('.user img')[2].src = json[2].headimgurl;
+			//twemoji.parse(document.getElementsByClassName('content')[0], {size: 36});
+		};
+	}
+	xmlhttp.open('get','https://wall.cgcgbcbc.com/api/messages?num=3',true);
+	xmlhttp.send();
+</script>
+
+</html>
